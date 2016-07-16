@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#checkout hook to locally set user name and email based on user defined patterns
+#The patterns are matched against the clone url.
+#
+#Based on http://www.dvratil.cz/2015/12/git-trick-628-automatically-set-commit-author-based-on-repo-url/
+
+function warn {
+  echo -e "\n$1 Email and author not initialized in local config!"
+}
+
+email="$(git config --local user.email)"
+name="$(git config --local user.name)"
+
+if [[ $1 != "0000000000000000000000000000000000000000" || -n $email || -n $name ]]; then
+  exit 0
+fi
+
+#get remote name:
+#  only one: take it
+#  more: take "origin", or fail
+remote="$([[ $(git remote | wc -l) -eq 1 ]] && git remote || git remote | grep "^origin$")"
+
+if [[ -z $remote ]]; then
+  warn "Failed to detect remote."
+  exit 0
+fi
+
+url="$(git config --local remote.${remote}.url)"
+
+if [[ ! -f ~/.git-clone-init ]]; then
+cat << INPUT > ~/.git-clone-init
+#!/bin/bash
+
+case "\$url" in
+  *@github.com:*    ) email=""; name="";;
+  *//github.com/*   ) email=""; name="";;
+esac
+INPUT
+  warn "\nMissing file ~/.git-clone-init. Template created..."
+  exit 0
+fi
+. ~/.git-clone-init
+
+if [[ -z $name || -z $email ]]; then
+  warn "Failed to detect identity using ~/.git-clone-init."
+  exit 0
+fi
+
+git config --local user.email "$email"
+git config --local user.name "$name"
+
+echo -e "\nIdentity set to $name <$email>"
