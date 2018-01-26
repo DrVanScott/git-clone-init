@@ -37,5 +37,5 @@ Just do a normal "git clone" as usual.
 
 ## Known issues
 
-git-clone-init won't work if you clone using "-n".
+git-clone-init won't work if you clone using "-n" or clone an empty repository.
 
