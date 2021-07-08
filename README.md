@@ -14,12 +14,16 @@ git config --global init.templatedir ~/.git-templates
 ```
 Copy the file "post-checkout" to your registered git template directory:
 ```bash
-cp post-checkout ~/.git-templates/hooks/
+git clone https://github.com/DrVanScott/git-clone-init.git /tmp/git-clone-init
+cp /tmp/git-clone-init/post-checkout ~/.git-templates/hooks/
 ```
-
+Copy a configuration template:
+```bash
+cp /tmp/git-clone-init/.git-clone-init ~/
+```
 ## Configuration
 
-You can use the file ".git-clone-init" as a starting point. Keep in mind to create a pattern for each protokoll you are using, normally ssh and https.
+You can use the file ".git-clone-init" as a starting point. Keep in mind to create a pattern for each protocol you are using, normally ssh and https.
 
 Example:
 ```bash
