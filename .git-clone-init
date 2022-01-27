@@ -1,6 +1,6 @@
 #!/bin/bash
 
 case "$url" in
-  *@github.com:*    ) email=""; name="";;
-  *//github.com/*   ) email=""; name="";;
+  *@github.com:*    ) email=""; name=""; gpgid="";;
+  *//github.com/*   ) email=""; name=""; gpgid="";;
 esac
