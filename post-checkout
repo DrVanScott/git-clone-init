@@ -49,5 +49,7 @@ fi
 
 git config --local user.email "$email"
 git config --local user.name "$name"
+git config --local author.email "$email"
+git config --local author.name "$name"
 
 echo -e "\nLocal identity for ${PWD##*/} set to \"$name <$email>\""
