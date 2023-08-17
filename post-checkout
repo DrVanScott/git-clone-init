@@ -28,8 +28,9 @@ fi
 
 url="$(git config --local remote.${remote}.url)"
 
-if [[ ! -f ~/.git-clone-init ]]; then
-cat << INPUT > ~/.git-clone-init
+configpath="${XDG_CONFIG_HOME:-~/.config}/git/templates/git-clone-init"
+if [[ ! -f "$configpath" ]]; then
+cat << INPUT > "$configpath"
 #!/bin/bash
 
 case "\$url" in
@@ -37,13 +38,13 @@ case "\$url" in
   *//github.com/*   ) email=""; name="";;
 esac
 INPUT
-  warn "\nMissing file ~/.git-clone-init. Template created..."
+  warn "\nMissing file $configpath. Template created..."
   exit 0
 fi
-. ~/.git-clone-init
+. "$configpath"
 
 if [[ -z $name || -z $email ]]; then
-  warn "Failed to detect identity using ~/.git-clone-init."
+  warn "Failed to detect identity using $configpath."
   exit 0
 fi
 
