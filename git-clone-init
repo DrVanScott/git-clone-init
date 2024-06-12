@@ -1,6 +1,10 @@
 #!/bin/bash
 
+#You can also provide the following variables:
+#    gpgid     ID of an gpg key      configuration of user.signingkey
+#    gpgsign   true/false            configuration of commit.gpgsign
+
 case "$url" in
-  *@github.com:*    ) email=""; name=""; gpgid="";;
-  *//github.com/*   ) email=""; name=""; gpgid="";;
+  *@github.com:*    ) email=""; name="";;
+  *//github.com/*   ) email=""; name="";;
 esac
