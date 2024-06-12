@@ -3,6 +3,7 @@
 ![Screenshot of a git clone](/about.png)
 
 Whenever a repository is cloned, author information (`user.email`, `user.name`) is set according defined patterns. No longer pushing commits with your corporate email address by accident.
+Optionally, also `user.signingkey` can be configured.
 
 ## Installation
 
@@ -28,10 +29,10 @@ You can use the file `git-clone-init` as a starting point. Keep in mind to creat
 Example:
 ```bash
 case "$url" in
-  *@github.com:*  ) email="my-public@email";    name="public name";;
-  *//github.com/* ) email="my-public@email";    name="public name";;
-  *@corp.com:*    ) email="my-corporate@email"; name="real name";;
-  *//corp.com/*   ) email="my-corporate@email"; name="real name";;
+  *@github.com:*  ) email="my-public@email";    name="public name"; gpgid="GPG ID";;
+  *//github.com/* ) email="my-public@email";    name="public name"; gpgid="GPG ID";;
+  *@corp.com:*    ) email="my-corporate@email"; name="real name"; gpgid="GPG same/other ID";;
+  *//corp.com/*   ) email="my-corporate@email"; name="real name"; gpgid="GPG same/other ID";;
 esac
 ```
 

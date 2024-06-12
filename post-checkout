@@ -34,8 +34,8 @@ cat << INPUT > "$configpath"
 #!/bin/bash
 
 case "\$url" in
-  *@github.com:*    ) email=""; name="";;
-  *//github.com/*   ) email=""; name="";;
+  *@github.com:*    ) email=""; name=""; gpgid="";;
+  *//github.com/*   ) email=""; name=""; gpgid="";;
 esac
 INPUT
   warn "\nMissing file $configpath. Template created..."
@@ -52,3 +52,10 @@ git config --local user.email "$email"
 git config --local user.name "$name"
 
 echo -e "\nLocal identity for ${PWD##*/} set to \"$name <$email>\""
+
+if [[ ! -z $gpgid ]]; then
+  git config commit.gpgsign true
+  git config user.signingkey $gpgid
+
+  echo -e "\n Repo configured to use $gpgid GPG Identity"
+fi
