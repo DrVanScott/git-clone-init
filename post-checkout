@@ -28,7 +28,7 @@ fi
 
 url="$(git config --local remote.${remote}.url)"
 
-configpath="${XDG_CONFIG_HOME:-~/.config}/git/templates/git-clone-init"
+configpath="${XDG_CONFIG_HOME:-${HOME}/.config}/git/templates/git-clone-init"
 if [[ ! -f "$configpath" ]]; then
 cat << INPUT > "$configpath"
 #!/bin/bash
