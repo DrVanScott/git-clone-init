@@ -1,0 +1,2 @@
+git-clone-init text=auto eol=lf
+post-checkout text=auto eol=lf
