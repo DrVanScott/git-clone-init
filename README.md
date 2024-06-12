@@ -3,6 +3,7 @@
 ![Screenshot of a git clone](/about.png)
 
 Whenever a repository is cloned, author information (`user.email`, `user.name`) is set according defined patterns. No longer pushing commits with your corporate email address by accident.
+Optionally, also `user.signingkey` and `commit.gpgsign` can be configured independently. Corresponding variablels `gpgid` and `gpgsign` might be set or omitted.
 
 ## Installation
 
@@ -30,8 +31,8 @@ Example:
 case "$url" in
   *@github.com:*  ) email="my-public@email";    name="public name";;
   *//github.com/* ) email="my-public@email";    name="public name";;
-  *@corp.com:*    ) email="my-corporate@email"; name="real name";;
-  *//corp.com/*   ) email="my-corporate@email"; name="real name";;
+  *@corp.com:*    ) email="my-corporate@email"; name="real name"; gpgid="GPG ID"; gpgsign="true/false";;
+  *//corp.com/*   ) email="my-corporate@email"; name="real name"; gpgid="GPG ID"; gpgsign="true/false";;
 esac
 ```
 

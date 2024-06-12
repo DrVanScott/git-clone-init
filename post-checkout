@@ -33,6 +33,10 @@ if [[ ! -f "$configpath" ]]; then
 cat << INPUT > "$configpath"
 #!/bin/bash
 
+#You can also provide the following variables:
+#    gpgid     ID of an gpg key      configuration of user.signingkey
+#    gpgsign   true/false            configuration of commit.gpgsign
+
 case "\$url" in
   *@github.com:*    ) email=""; name="";;
   *//github.com/*   ) email=""; name="";;
@@ -52,3 +56,15 @@ git config --local user.email "$email"
 git config --local user.name "$name"
 
 echo -e "\nLocal identity for ${PWD##*/} set to \"$name <$email>\""
+
+if [[ ! -z $gpgid ]]; then
+  git config user.signingkey "$gpgid"
+
+  echo -e "\n Repo configured to use $gpgid GPG Identity"
+fi
+
+if [[ ! -z $gpgsign ]]; then
+  git config commit.gpgsign "$gpgsign"
+
+  echo -e "\n Repo configured to use commit.gpgsign=$gpgsign"
+fi
